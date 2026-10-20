@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Aliby — Design Tokens
+   --------------------------------------------------------------------------
+   Sumber: proyek desain "Aliby Scrapbook"
+           → handoff-scrapbook.md §1 (Revisi 3) + Aliby Scrapbook.dc.html
+   Arah visual: scrapbook / "papan bukti".
+
+   File ini adalah SUMBER KEBENARAN untuk warna, font, spacing, radius,
+   bayangan, dan rotasi (lihat docs/aliby-konvensi.md). Jangan hardcode nilai di komponen.
+
+   Handoff ditulis bergaya Tailwind v3 (`theme.extend`); proyek ini memakai
+   Tailwind v4, jadi token dipetakan lewat `@theme` di bawah. Nama token
+   dipertahankan persis seperti di handoff supaya `var(--color-board)` dsb.
+   tetap valid, sekaligus menghasilkan utility (`bg-board`, `rounded-card`, …).
+   ========================================================================== */
+
+/* `static` = emit SEMUA token ke :root, termasuk yang belum dipakai komponen.
+   Tanpa itu Tailwind v4 memangkas token yang tak terpakai (mis. --leading-snug
+   hilang), padahal file ini harus jadi katalog token yang lengkap. */
+@theme static {
+  /* ---------- WARNA: nama peran, bukan nama warna mentah ---------- */
+
+  /* Papan (dasar hijau berlapis) */
+  --color-board: #22493e;                       /* gabus hijau utama */
+  --color-board-speckle-d: rgba(0, 0, 0, 0.16); /* titik gelap tekstur */
+  --color-board-speckle-l: rgba(255, 255, 255, 0.05); /* titik terang tekstur */
+  --color-booth: #0f2d27;                       /* bilik gelap (layar Capture) */
+
+  /* Brand */
+  --color-brand-pink: #ff6fa6;     /* WARNA BRAND — judul & CTA utama */
+  --color-brand-pink-ink: #1a1712; /* garis/stroke pink bubble */
+
+  /* Aksen ceria (dekorasi & tombol sekunder) */
+  --color-accent-yellow: #ffde5c; /* sticky, tape, CTA sekunder */
+  --color-accent-red: #e8503f;    /* pin utama, alert */
+  --color-accent-blue: #4fb3e8;   /* washi, doodle */
+  --color-accent-orange: #ff9e42; /* washi, doodle */
+  --color-pin-silver: #9aa0a6;    /* pin non-terpilih */
+
+  /* Material kertas */
+  --color-paper: #fbfaf5;    /* polaroid / kertas strip A */
+  --color-kraft: #c9a46b;    /* map/tag kraft */
+  --color-kraft-ink: #3a2c15; /* teks di atas kraft */
+
+  /* Tinta & teks */
+  --color-ink: #1a1712;      /* garis, border, teks di kertas/kuning */
+  --color-cream: #fbf3e4;    /* teks di atas papan gelap */
+  --color-teal-ink: #1c6d5f; /* teks tangan di atas kertas terang, link */
+
+  /* Foto (placeholder — diganti frame asli) */
+  --color-photo-a: #c4c1bb;
+  --color-photo-b: #d0cdc7;
+
+  /* ---------- FONT ----------
+     next/font memakai nama variabel TERSENDIRI (--font-titan,
+     --font-permanent-marker, --font-archivo) supaya tidak menimpa token di
+     bawah yang berisi fallback stack. Lihat docs/aliby-konvensi.md §Desain — snippet di
+     handoff memakai `variable: '--font-display'`, dan itu akan membuang
+     fallback 'Arial Black'. */
+  --font-display: var(--font-titan), "Arial Black", system-ui, sans-serif; /* judul bubble bergaris */
+  --font-marker: var(--font-permanent-marker), "Comic Sans MS", cursive;   /* aksen spidol */
+  --font-sans: var(--font-archivo), system-ui, sans-serif;                 /* teks isi */
+
+  /* ---------- SKALA TIPOGRAFI ---------- */
+  --text-display-xl: 52px; /* hero desktop */
+  --text-display-l: 34px;  /* hero mobile / wordmark */
+  --text-display-m: 27px;  /* judul layar besar */
+  --text-display-s: 20px;  /* judul layar kecil (header nav) */
+  --text-marker-l: 24px;   /* tagline desktop */
+  --text-marker-m: 15px;   /* tagline mobile / aksen */
+  --text-marker-s: 11px;   /* catatan tangan kecil */
+  --text-body: 14px;
+  --text-caption: 11px;    /* MIN untuk teks kecil (WCAG — lihat catatan bawah) */
+
+  /* ---------- LEADING ---------- */
+  --leading-tight: 1.02;
+  --leading-snug: 1.2;
+  --leading-body: 1.5;
+
+  /* ---------- SPACING ----------
+     Skala 4px. Default Tailwind v4 (0.25rem) kebetulan identik; dipatok ke px
+     supaya persis mengikuti spesifikasi desain. p-4 = 16px = --space-4. */
+  --spacing: 4px;
+
+  /* ---------- RADIUS ---------- */
+  --radius-phone: 32px; /* bezel device (khusus mockup) */
+  --radius-card: 12px;  /* polaroid / kartu besar */
+  --radius-btn: 14px;   /* label stiker (tombol) */
+  --radius-chip: 7px;   /* tag kraft / label kecil */
+  --radius-photo: 3px;  /* sudut foto di dalam frame */
+
+  /* ---------- BAYANGAN (kesan menempel) ----------
+     Nilai mentahnya ada di blok `:root` di bawah, bukan di sini. Alasannya:
+     Tailwind v4 TIDAK mengemit `--shadow-*` ke `:root` — ia meng-inline nilainya
+     ke dalam utility. Kalau ditulis literal di sini, `shadow-pola` jalan tapi
+     `var(--shadow-pola)` di CSS tulisan tangan TIDAK resolve. Jadi nilai mentah
+     hidup sebagai `--sh-*` di `:root`, lalu di-alias dua kali: di sini (untuk
+     utility) dan di `:root` sebagai `--shadow-*` (untuk var() tulisan tangan).
+     Satu sumber nilai, dua jalur akses, tanpa referensi sirkular. */
+  --shadow-pola: var(--sh-pola);
+  --shadow-sticky: var(--sh-sticky);
+  --shadow-tape: var(--sh-tape);
+  --shadow-pin: var(--sh-pin);
+  --shadow-kraft: var(--sh-kraft);
+  --shadow-btn: var(--sh-btn);
+  --shadow-btn-ghost: var(--sh-btn-ghost);
+}
+
+/* Token yang SENGAJA tidak masuk `@theme`.
+   `--inset-*` dan `--space-*` bertabrakan dengan namespace Tailwind v4
+   (`inset-*` = posisi, `--spacing` = skala) sehingga akan menghasilkan utility
+   palsu. `--rot-*`, `--weight-*`, dan `--pad-screen` tidak punya namespace.
+   Semuanya tetap dipakai lewat `var()` atau arbitrary value. */
+:root {
+  /* ---------- BAYANGAN: nilai mentah (SUMBER TUNGGAL) ---------- */
+  --sh-pola: 0 9px 20px rgba(0, 0, 0, 0.34);    /* polaroid terangkat dari papan */
+  --sh-sticky: 2px 5px 9px rgba(0, 0, 0, 0.28); /* sticky note */
+  --sh-tape: 0 2px 5px rgba(0, 0, 0, 0.16);     /* washi tape */
+  --sh-pin: 0 3px 5px rgba(0, 0, 0, 0.45);      /* kepala pin */
+  --sh-kraft: 0 5px 12px rgba(0, 0, 0, 0.28);
+  --sh-btn: 2.5px 3px 0 var(--color-ink);       /* hard-offset stiker (afford. tombol) */
+  --sh-btn-ghost: 2px 2.5px 0 rgba(0, 0, 0, 0.35);
+
+  /* Alias nama handoff, supaya `var(--shadow-pola)` dkk. tetap valid di CSS
+     tulisan tangan. Tailwind tidak mengemit `--shadow-*` sendiri, jadi tidak
+     ada deklarasi ganda. */
+  --shadow-pola: var(--sh-pola);
+  --shadow-sticky: var(--sh-sticky);
+  --shadow-tape: var(--sh-tape);
+  --shadow-pin: var(--sh-pin);
+  --shadow-kraft: var(--sh-kraft);
+  --shadow-btn: var(--sh-btn);
+  --shadow-btn-ghost: var(--sh-btn-ghost);
+
+  /* Vignette (bukan box-shadow utility — dipakai di .board / bilik) */
+  --inset-board: inset 0 0 55px rgba(0, 0, 0, 0.4); /* vignette papan */
+  --inset-booth: inset 0 0 70px rgba(0, 0, 0, 0.6); /* vignette bilik */
+
+  /* Bobot (display & marker single-weight; ini untuk Archivo) */
+  --weight-sans-strong: 700;
+  --weight-sans-med: 500;
+
+  /* Spacing eksplisit + padding tepi layar mobile */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --pad-screen: 22px;
+
+  /* ---------- RENTANG ROTASI (elemen miring) ----------
+     Nilai di bawah = titik awal; acak per instance dalam rentang di komentar. */
+  --rot-photo: -5deg;   /* kartu/polaroid: -5° … +3° */
+  --rot-tape: -9deg;    /* washi: ±4° … ±9° */
+  --rot-sticky: -7deg;  /* sticky note: ±6° … ±8° */
+  --rot-doodle: -16deg; /* bintang/kilau: ±10° … ±20° */
+  --rot-btn: -1deg;     /* TOMBOL: maks ±3° (keterbacaan!) */
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-sans-med);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    background-color: var(--color-board);
+    color: var(--color-cream);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  /* Judul bubble bergaris — Tailwind tak punya text-stroke bawaan.
+     Tebal stroke & bayangan dibuat overridable lewat --disp-stroke /
+     --disp-shadow, karena di desain nilainya berbeda per instance
+     (1.3px–2px stroke, 1.5px–3px shadow). Default = nilai handoff. */
+  .disp {
+    font-family: var(--font-display);
+    -webkit-text-stroke: var(--disp-stroke, 2px) var(--color-ink);
+    text-shadow: var(--disp-shadow, 2px 2px 0 var(--color-ink));
+    paint-order: stroke fill; /* jaga fill tak tergerus stroke */
+  }
+
+  /* Bilik gelap layar Capture. Sengaja lebih pekat dari .board dan
+     vignette-nya lebih dalam: di layar ini kamera yang harus dominan. */
+  .booth {
+    background-color: var(--color-booth);
+    background-image: radial-gradient(
+      rgba(0, 0, 0, 0.35) 1px,
+      transparent 1.6px
+    );
+    background-size: 11px 11px;
+    box-shadow: var(--inset-booth);
+  }
+
+  /* Tekstur papan gabus — CSS-only, 0 aset gambar.
+     Upgrade ke cork-tile.webp baru di Phase 3 (handoff §3). */
+  .board {
+    background-color: var(--color-board);
+    background-image:
+      radial-gradient(var(--color-board-speckle-d) 1px, transparent 1.6px),
+      radial-gradient(var(--color-board-speckle-l) 1px, transparent 1.6px);
+    background-size: 9px 9px, 9px 9px;
+    background-position: 0 0, 4px 5px;
+    box-shadow: var(--inset-board);
+  }
+}
+
+/* ==========================================================================
+   Catatan aksesibilitas (WCAG AA) — handoff §Catatan
+   - Teks kecil selalu ink #1a1712 di atas kertas/kuning, ATAU cream #fbf3e4
+     di atas papan gelap. cream/board ≈ 11:1 · ink/kuning ≈ 12:1 · ink/paper ≈ 15:1.
+   - JANGAN pernah pink atau kuning sebagai teks kecil di latar terang.
+   - Pink brand sebagai teks hanya pada skala judul (dengan stroke ink), atau
+     sebagai fill tombol dengan teks ink.
+   - Tombol miring: rotasi ≤ ±3°, hit-area ≥ 44px, wajib border ink + hard-shadow.
+   ========================================================================== */

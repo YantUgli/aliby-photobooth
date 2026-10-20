@@ -1,0 +1,40 @@
+{
+  "filters": [
+    {
+      "id": "asli",
+      "name": "Asli",
+      "css": "none",
+      "webgl": null
+    },
+    {
+      "id": "hitam-putih",
+      "name": "Hitam Putih",
+      "css": "grayscale(1) contrast(1.1)",
+      "webgl": null
+    },
+    {
+      "id": "warm-film",
+      "name": "Warm Film",
+      "css": "sepia(0.2) contrast(1.05) saturate(1.15) brightness(1.02)",
+      "webgl": null
+    },
+    {
+      "id": "dingin",
+      "name": "Dingin",
+      "css": "hue-rotate(-10deg) saturate(0.9) contrast(1.05) brightness(1.03)",
+      "webgl": null
+    },
+    {
+      "id": "vintage",
+      "name": "Vintage",
+      "css": "sepia(0.45) saturate(0.85) contrast(0.95) brightness(1.05)",
+      "webgl": null
+    },
+    {
+      "id": "kontras",
+      "name": "Kontras",
+      "css": "contrast(1.35) saturate(1.1)",
+      "webgl": null
+    }
+  ]
+}

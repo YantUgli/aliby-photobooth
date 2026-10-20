@@ -1,0 +1,27 @@
+{
+  "id": "scrapbook-duo",
+  "name": "Duo Potret",
+  "author": "aliby",
+  "canvas": {
+    "width": 600,
+    "height": 1568
+  },
+  "background": "#fbfaf5",
+  "overlay": "scrapbook-duo.png",
+  "slots": [
+    {
+      "id": 1,
+      "x": 40,
+      "y": 150,
+      "w": 520,
+      "h": 640
+    },
+    {
+      "id": 2,
+      "x": 40,
+      "y": 826,
+      "w": 520,
+      "h": 640
+    }
+  ]
+}

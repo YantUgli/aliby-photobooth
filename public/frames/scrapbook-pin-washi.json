@@ -1,0 +1,14 @@
+{
+  "id": "scrapbook-pin-washi",
+  "name": "Pin & Washi",
+  "author": "aliby",
+  "canvas": { "width": 600, "height": 1800 },
+  "background": "#fbfaf5",
+  "overlay": "scrapbook-pin-washi.png",
+  "slots": [
+    { "id": 1, "x": 40, "y": 150, "w": 520, "h": 360 },
+    { "id": 2, "x": 40, "y": 546, "w": 520, "h": 360 },
+    { "id": 3, "x": 40, "y": 942, "w": 520, "h": 360 },
+    { "id": 4, "x": 40, "y": 1338, "w": 520, "h": 360 }
+  ]
+}

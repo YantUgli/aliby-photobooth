@@ -1,0 +1,34 @@
+{
+  "id": "scrapbook-trio",
+  "name": "Trio",
+  "author": "aliby",
+  "canvas": {
+    "width": 600,
+    "height": 1404
+  },
+  "background": "#fbfaf5",
+  "overlay": "scrapbook-trio.png",
+  "slots": [
+    {
+      "id": 1,
+      "x": 40,
+      "y": 150,
+      "w": 520,
+      "h": 360
+    },
+    {
+      "id": 2,
+      "x": 40,
+      "y": 546,
+      "w": 520,
+      "h": 360
+    },
+    {
+      "id": 3,
+      "x": 40,
+      "y": 942,
+      "w": 520,
+      "h": 360
+    }
+  ]
+}
